@@ -1,0 +1,18 @@
+# sbt
+# (may want to keep parts of 'project')
+bin/
+project/
+target/
+
+# intellij idea
+*.log
+*.iml
+*.ipr
+*.iws
+.idea*
+
+# mac
+.DS_Store
+
+#general
+*.class
