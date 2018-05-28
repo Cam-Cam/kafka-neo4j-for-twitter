@@ -2,7 +2,7 @@ package neo4j
 
 
 import org.slf4j.LoggerFactory
-import twitter.Tweet
+import twitter.{Tweet,User}
 
 class Neo4jQueries
 
@@ -30,15 +30,37 @@ object Neo4jQueries  {
     s"MERGE (t:Tweet {id:'${tweet.id}'})" +
       s"ON CREATE SET t.created_at= '${tweet.created_at}'," +
       s"t.text='${tweet.text}'," +
-      s"t.nb_retweets='${tweet.nb_retweets}'," +
-      s"t.nb_favorites='${tweet.nb_favorites}'," +
+//      s"t.nb_retweets='${tweet.nb_retweets}'," +
+//      s"t.nb_favorites='${tweet.nb_favorites}'," +
       s"t.is_retweet='${tweet.is_retweet}'" +
       s"ON MATCH SET t.created_at= '${tweet.created_at}'," +
       s"t.text='${tweet.text}'," +
-      s"t.nb_retweets='${tweet.nb_retweets}'," +
-      s"t.nb_favorites='${tweet.nb_favorites}'," +
+//      s"t.nb_retweets='${tweet.nb_retweets}'," +
+//      s"t.nb_favorites='${tweet.nb_favorites}'," +
       s"t.is_retweet='${tweet.is_retweet}'"
   }
+
+  def writeUser(user: User): String = {
+    //    logger.info(s"Merge component ${tweet.id} with" +
+    //      s"[created_at : ${tweet.created_at}]-" + s"[text : ${tweet.text}]-" + s"[nb_retweets : ${tweet.nb_retweets}]-" + s"[nb_favorites : ${tweet.nb_favorites}]-" + s"[is_retweet : ${tweet.is_retweet}]")
+
+    s"MERGE (u:User {id:'${user.id}'})" +
+      s"ON CREATE SET u.name= '${user.name}'," +
+      s"u.screen_name='${user.screen_name}'," +
+      s"u.location='${user.location}'," +
+      s"u.nb_friends='${user.nb_friends}'," +
+      s"u.nb_followers='${user.nb_followers}'," +
+      s"u.nb_statuses='${user.nb_statuses}'" +
+      s"ON MATCH SET u.name= '${user.name}'," +
+      s"u.screen_name='${user.screen_name}'," +
+      s"u.location='${user.location}'," +
+      s"u.nb_friends='${user.nb_friends}'," +
+      s"u.nb_followers='${user.nb_followers}'," +
+      s"u.nb_statuses='${user.nb_statuses}'"
+  }
+
+
+
 //  }
 //
 //  def writeUser

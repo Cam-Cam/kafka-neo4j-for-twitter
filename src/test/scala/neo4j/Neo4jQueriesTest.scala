@@ -2,7 +2,7 @@ package neo4j
 
 import org.neo4j.driver.v1._
 import org.scalatest.FunSuite
-import twitter.Tweet
+import twitter.{Tweet, User}
 
 import scala.collection.JavaConverters._
 
@@ -25,7 +25,7 @@ class Neo4jQueriesTest extends FunSuite {
 
   test("Import 1 tweet"){
 
-    val tweet1: Tweet = Tweet("1","20180534","blablabla","9","8",true)
+    val tweet1: Tweet = Tweet("1","20180534","blab'labla".replace("'",""),true,User("idA","Cam-cam","Camille Dufau","Lisbon","100","200","300"))
     val tweets: List[Tweet] = List(tweet1)
 
     val session: Session = driver.session()
@@ -37,7 +37,7 @@ class Neo4jQueriesTest extends FunSuite {
 
   test("Test idempotence"){
 
-    val tweet1: Tweet = Tweet("ID1","20180534","blablabla","9","8",true)
+    val tweet1: Tweet = Tweet("ID1","20180534","blablabla",true,User("idA","Cam-cam","Camille Dufau","Lisbon","100","200","300"))
 
     val tweets: List[Tweet] = List(tweet1)
 

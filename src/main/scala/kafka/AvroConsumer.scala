@@ -3,10 +3,12 @@ package kafka
 import java.util
 import java.util.Properties
 
+import worker.Worker
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecords, KafkaConsumer}
 import org.apache.kafka.common.serialization.StringDeserializer
+import twitter.Tweet
 
 import scala.collection.JavaConverters._
 
@@ -33,9 +35,10 @@ object AvroConsumer extends App {
 
   while(true){
     val records: ConsumerRecords[String, GenericRecord] = consumer.poll(1000)
-    records.forEach(r =>
-      //println(r.value().get("user").asInstanceOf[GenericRecord].get("name"))
+    records.forEach(r => {
       println(r.value())
-    )
+      //Worker.writeTweetInformation(Worker.collectTweetInformation(r))
+    })
+
   }
 }
